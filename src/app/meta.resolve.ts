@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { Title, Meta } from '@angular/platform-browser';
 import { ContentfulService } from './core/contentful.service';
 
@@ -13,8 +12,11 @@ export class MetaResolve implements Resolve<any> {
   public async resolve(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<any> {
 
-    if (state.url.indexOf("/partners")) {
+    if (state.url.indexOf('/partners')) {
       this.title.setTitle('Partners - ' + this.contentful.getEvent().eventTitle);
+    }
+    if (state.url.indexOf('/schedule')) {
+      this.title.setTitle('Schedule - ' + this.contentful.getEvent().eventTitle);
     }
     this.meta.updateTag({ property: 'og:site_name', content: this.contentful.getEvent().eventTitle });
     return true;

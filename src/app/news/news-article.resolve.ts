@@ -1,9 +1,8 @@
-import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 import { ContentfulService } from '../core/contentful.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { get, values } from 'lodash';
+import { get } from 'lodash';
 import * as qs from 'qs';
 import { Title } from '@angular/platform-browser';
 
@@ -40,7 +39,7 @@ export class NewsArticleResolve implements Resolve<any> {
     });
 
     if (route.params.article) {
-      let page = get(response, 'data.newsItems[0]');
+      const page = get(response, 'data.newsItems[0]');
       this.title.setTitle(page.title + ' - ' + this.contentful.getEvent().eventTitle);
       return page;
     } else {
